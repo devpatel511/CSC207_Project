@@ -1,2 +1,2 @@
 # CSC207_Project
-A JavaFX P
+A Java Project utlizing the JavaFX framework.
