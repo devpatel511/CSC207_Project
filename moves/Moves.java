@@ -30,7 +30,7 @@ class Moves {
         return "Moves object initialized";
     }
 
-    // returns static var.
+    // returns static variable
     public int movesMade() {
         return numMoves;
     }
