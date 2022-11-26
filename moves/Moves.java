@@ -1,3 +1,5 @@
+package moves;
+
 class Moves {
     private static Moves moveMade = null;
     // static var to keep track of moves made
@@ -33,3 +35,4 @@ class Moves {
         return numMoves;
     }
 }
+

@@ -1,14 +1,7 @@
+package moves;
+
 class Test {
     public static void main(String[] args) {
-        /*
-        Sanity checks to make sure only one object is created and the moves counter and reset
-        methods work. Running the file should print the following:
-        3
-        true
-        true
-        true
-        0
-         */
         Moves db1;
         Moves db2;
         Moves db3;
