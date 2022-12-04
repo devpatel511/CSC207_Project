@@ -72,9 +72,18 @@ public class MazeView {
 
         this.settingButton = new Button("Settings");
         settingButton.setId("Settings");
+        settingButton.setOnAction(e ->
+        {
+            createSettingView();
+            borderPane.requestFocus();
+        });
 
         this.helpButton = new Button("Help");
         helpButton.setId("Help");
+        helpButton.setOnAction(e ->{
+            createTutorialView();
+            borderPane.requestFocus();
+        });
 
         this.setSizeButton = new Button("Set Size");
         setSizeButton.setId("SetSize");
@@ -145,7 +154,20 @@ public class MazeView {
     public void setSize() {
         int width = Integer.parseInt(widthField.getText());
         int height = Integer.parseInt(heightField.getText());
+        System.out.println(width);
+        System.out.println(height);
         this.model = new MazeModel(width, height);
+    }
+
+
+    private void createSettingView()
+    {
+        SettingsView sv = new SettingsView(this);
+    }
+
+    private void createTutorialView()
+    {
+        TutorialView tv = new TutorialView(this);
     }
 
 
