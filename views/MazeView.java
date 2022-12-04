@@ -10,6 +10,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -31,7 +33,8 @@ public class MazeView {
     MazeModel model; //reference to model
     Stage stage;
 
-    Button helpButton, settingButton, startButton;
+    Button helpButton, settingButton, startButton, setSizeButton;
+    TextField widthField, heightField;
 
     BorderPane borderPane;
 
@@ -73,7 +76,21 @@ public class MazeView {
         this.helpButton = new Button("Help");
         helpButton.setId("Help");
 
-        HBox controls = new HBox(20, this.settingButton, this.startButton, this.helpButton);
+        this.setSizeButton = new Button("Set Size");
+        setSizeButton.setId("SetSize");
+        setSizeButton.setOnAction(e -> {
+            setSize();
+        });
+
+        Label widthLabel = new Label("width:");
+        Label heightLabel = new Label("height:");
+        this.widthField = new TextField();
+        this.heightField = new TextField();
+        this.widthField.setPrefWidth(40);
+        this.heightField.setPrefWidth(40);
+
+        HBox controls = new HBox(20, this.settingButton, this.startButton, this.helpButton,
+                widthLabel, this.widthField, heightLabel, this.heightField, this.setSizeButton);
         controls.setPadding(new Insets(20, 20, 20, 20));
         controls.setAlignment(Pos.CENTER);
 
@@ -118,6 +135,17 @@ public class MazeView {
         final int bWidth = this.model.getBoard().getWidth();
 
 
+    }
+
+
+    /**
+     * Function used to create new maze model with user desired size. It is called
+     * on click of the set size button and reads from width and height fields.
+     */
+    public void setSize() {
+        int width = Integer.parseInt(widthField.getText());
+        int height = Integer.parseInt(heightField.getText());
+        this.model = new MazeModel(width, height);
     }
 
 

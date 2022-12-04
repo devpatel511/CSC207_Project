@@ -23,6 +23,14 @@ public class MazeModel implements Serializable {
         this.board = new MazeBoard(WIDTH, HEIGHT);
     }
 
+    /**
+     * Overloaded constructor for model.
+     * Creates a new maze board with a specified size, rather than utilizing default sizes.
+     */
+    public MazeModel(int width, int height) {
+        this.board = new MazeBoard(width, height);
+    }
+
     public MazeBoard getBoard()
     {
         return this.board;
