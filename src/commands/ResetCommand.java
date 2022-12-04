@@ -1,3 +1,5 @@
+package commands;
+
 /**
  * Class ResetCommand
  * A Command to be applied to the maze

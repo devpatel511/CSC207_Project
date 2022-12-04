@@ -5,9 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * A Tetris Application, in JavaFX
- *
- * Based on the Tetris assignment in the Nifty Assignments Database, authored by Nick Parlante
+ * A Maze Application, in JavaFX
  */
 public class MazeApp extends Application {
     MazeModel model;

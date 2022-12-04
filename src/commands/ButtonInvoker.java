@@ -1,3 +1,5 @@
+package commands;
+
 /**
  * Class ButtonInvoker manages MazeCommands
  */
