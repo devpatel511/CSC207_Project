@@ -1,12 +1,19 @@
 package moves;
 
-class Moves {
+/*
+Moves class which increments moves made through one singleton moves object
+ */
+public class Moves {
     private static Moves moveMade = null;
     // static var to keep track of moves made
     private static int numMoves = 0;
 
-    private Moves() {}
+    public Moves() {}
 
+    /*
+    Instantiates a moves object if it doesn't exist, else returns the existing one
+    This instantiates the singleton moves object
+     */
     public static synchronized Moves getInstance() {
 
         // create the singleton Moves object if it
@@ -20,19 +27,24 @@ class Moves {
         return moveMade;
     }
 
-    // if ever board is cleared, counter is reset
+    /*
+    If ever board is cleared, counter is reset
+     */
     public void reset() {
         numMoves = 0;
     }
 
-    // returns a string saying obj. is initialized
+    /*
+    Returns a string saying obj. is initialized
+     */
     public String createObj() {
         return "Moves object initialized";
     }
 
-    // returns static variable
-    public int movesMade() {
+    /*
+    Returns static variable with number of moves made
+     */
+    public static int movesMade() {
         return numMoves;
     }
 }
-

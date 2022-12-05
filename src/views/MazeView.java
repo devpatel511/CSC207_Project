@@ -1,14 +1,14 @@
 package views;
 
+import javafx.scene.text.Font;
 import models.MazeModel;
+import moves.Moves;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -18,15 +18,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
-import java.io.IOException;
-
-import java.awt.*;
 
 /**
  * The maze UI class which visualizes the maze. The maze can be reset once a visualization begins
@@ -40,6 +33,8 @@ public class MazeView {
 
     Button helpButton, settingButton, startButton, setSizeButton, toggleColour;
     TextField widthField, heightField;
+
+    Label movesMade;
 
     BorderPane borderPane;
     Timeline timeline;
@@ -115,9 +110,13 @@ public class MazeView {
         this.heightField.setPrefWidth(40);
         this.widthField.setText("25");
         this.heightField.setText("25");
+        this.movesMade = new Label("moves made");
+        this.movesMade.setText("Moves made: 0");
+        this.movesMade.setFont(new Font(20));
+        this.movesMade.setStyle("-fx-text-fill: #FF0000");
 
         HBox controls = new HBox(20, this.toggleColour, this.settingButton, this.startButton, this.helpButton,
-                widthLabel, this.widthField, heightLabel, this.heightField, this.setSizeButton);
+                widthLabel, this.widthField, heightLabel, this.heightField, this.setSizeButton, this.movesMade);
         controls.setPadding(new Insets(20, 20, 20, 20));
         controls.setAlignment(Pos.CENTER);
 
@@ -215,6 +214,7 @@ public class MazeView {
         }
         gc.setFill(Color.RED);
         gc.fillRect(1 + deltaX*(width-1), 1 + deltaY*(height-1), deltaX, deltaY);
+        updateMoves();
     }
 
 
@@ -234,7 +234,17 @@ public class MazeView {
      */
     public void reset() {
         this.model = new MazeModel(this.model.getBoard().getWidth(), this.model.getBoard().getHeight());
+        moves.Moves x;
+        x = moves.Moves.getInstance();
+        x.reset();
         this.paintBoard();
+    }
+
+    /*
+    Update moves made tracker on UI
+     */
+    private void updateMoves() {
+        movesMade.setText("Moves made: " + moves.Moves.movesMade());
     }
 
     /**
