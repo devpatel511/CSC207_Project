@@ -1,3 +1,5 @@
+package commands;
+
 /**
  * The maze UI class which visualizes the maze. The maze can be reset once a visualization begins
  * and has the ability to toggle between two colours.
