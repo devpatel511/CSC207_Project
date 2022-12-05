@@ -1,3 +1,5 @@
+package commands;
+
 /**
  * Class ColourCommand
  * A Command to be applied to the maze
