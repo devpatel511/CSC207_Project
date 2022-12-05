@@ -1,4 +1,6 @@
-package models;
+package src.models;
+
+import moves.Moves;
 
 import java.io.Serializable;
 
@@ -43,6 +45,8 @@ public class MazeModel implements Serializable {
         if (move == MoveType.RIGHT) {
             if (this.currentX < this.board.getWidth() - 1) {
                 if (this.board.mazeGrid[this.currentX + 1][this.currentY] != 2) {
+                    moves.Moves a;
+                    a = moves.Moves.getInstance();
                     this.board.mazeGrid[this.currentX][this.currentY] = 3;
                     this.currentX++;
                     this.board.mazeGrid[this.currentX][this.currentY] = 4;
@@ -51,6 +55,8 @@ public class MazeModel implements Serializable {
         } else if (move == MoveType.LEFT) {
             if (this.currentX > 0) {
                 if (this.board.mazeGrid[this.currentX - 1][this.currentY] != 2) {
+                    moves.Moves a;
+                    a = moves.Moves.getInstance();
                     this.board.mazeGrid[this.currentX][this.currentY] = 3;
                     this.currentX--;
                     this.board.mazeGrid[this.currentX][this.currentY] = 4;
@@ -59,6 +65,8 @@ public class MazeModel implements Serializable {
         } else if (move == MoveType.DOWN) {
             if (this.currentY < this.board.getHeight() - 1) {
                 if (this.board.mazeGrid[this.currentX][this.currentY + 1] != 2) {
+                    moves.Moves a;
+                    a = moves.Moves.getInstance();
                     this.board.mazeGrid[this.currentX][this.currentY] = 3;
                     this.currentY++;
                     this.board.mazeGrid[this.currentX][this.currentY] = 4;
@@ -67,6 +75,8 @@ public class MazeModel implements Serializable {
         } else if (move == MoveType.UP) {
             if (this.currentY > 0) {
                 if (this.board.mazeGrid[this.currentX][this.currentY - 1] != 2) {
+                    moves.Moves a;
+                    a = moves.Moves.getInstance();
                     this.board.mazeGrid[this.currentX][this.currentY] = 3;
                     this.currentY--;
                     this.board.mazeGrid[this.currentX][this.currentY] = 4;

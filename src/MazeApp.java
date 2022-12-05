@@ -1,4 +1,4 @@
-import models.MazeModel;
+import src.models.MazeModel;
 import views.MazeView;
 
 import javafx.application.Application;
