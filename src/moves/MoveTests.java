@@ -1,10 +1,11 @@
 package moves;
 
-/*
-Sanity checks for moves singleton object
+/**
+ * Sanity checks for moves singleton object
  */
 class Test {
     public static void main(String[] args) {
+        // instantiate 3 objects
         moves.Moves db1;
         moves.Moves db2;
         moves.Moves db3;

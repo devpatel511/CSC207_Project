@@ -103,7 +103,7 @@ public class MazeView {
             setSize();
         });
 
-        this.toggleColour = new Button("☀️");
+        this.toggleColour = new Button("☀");
         toggleColour.setOnAction(e -> {
             colourChange();
         });
@@ -119,15 +119,58 @@ public class MazeView {
         this.movesMade = new Label("moves made");
         this.movesMade.setText("Moves made: 0");
         this.movesMade.setFont(new Font(20));
-        this.movesMade.setStyle("-fx-text-fill: #FF0000");
+        this.movesMade.setStyle("-fx-text-fill: #000000");
 
         HBox controls = new HBox(20, this.toggleColour, this.settingButton, this.startButton, this.helpButton,
-                widthLabel, this.widthField, heightLabel, this.heightField, this.setSizeButton, this.movesMade);
+                widthLabel, this.widthField, heightLabel, this.heightField, this.setSizeButton);
         controls.setPadding(new Insets(20, 20, 20, 20));
         controls.setAlignment(Pos.CENTER);
 
+        // the following are on-screen buttons to navigate the maze
+        // this feature makes the game more accessible
+        HBox onScreen = new HBox();
+        Button up = new Button("Up⬆");
+        up.setId("Up⬆");
+        up.setOnAction(e ->
+        {
+            model.moveCharacter(MazeModel.MoveType.UP);
+            toggle = true;
+            paintBoard();
+            borderPane.requestFocus();
+        });
+        Button down = new Button("Down⬇");
+        down.setOnAction(e ->
+        {
+            model.moveCharacter(MazeModel.MoveType.DOWN);
+            toggle = true;
+            paintBoard();
+            borderPane.requestFocus();
+        });
+        Button left = new Button("Left⬅");
+        left.setOnAction(e ->
+        {
+            model.moveCharacter(MazeModel.MoveType.LEFT);
+            toggle = true;
+            paintBoard();
+            borderPane.requestFocus();
+        });
+        Button right = new Button("Right➡");
+        right.setOnAction(e ->
+        {
+            model.moveCharacter(MazeModel.MoveType.RIGHT);
+            toggle = true;
+            paintBoard();
+            borderPane.requestFocus();
+        });
+        onScreen.getChildren().addAll(movesMade, up, down, left, right);
+        onScreen.setAlignment(Pos.CENTER);
+        onScreen.setSpacing(10);
+
         borderPane.setBottom(controls);
+        borderPane.setTop(onScreen);
         borderPane.setCenter(canvas);
+
+
         borderPane.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent k) {
@@ -246,8 +289,8 @@ public class MazeView {
         this.paintBoard();
     }
 
-    /*
-    Update moves made tracker on UI
+    /**
+     * Update moves made tracker on UI
      */
     private void updateMoves() {
         movesMade.setText("Moves made: " + moves.Moves.movesMade());
