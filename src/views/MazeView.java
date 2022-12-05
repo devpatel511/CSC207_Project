@@ -89,11 +89,17 @@ public class MazeView {
 
         this.settingButton = new Button("Settings");
         settingButton.setId("Settings");
+        settingButton.setOnAction(e ->
+        {
+            createSettingView();
+            borderPane.requestFocus();
+        });
 
         this.helpButton = new Button("Help");
         helpButton.setId("Help");
-        helpButton.setOnAction(e -> {
-
+        helpButton.setOnAction(e ->{
+            createTutorialView();
+            borderPane.requestFocus();
         });
 
         this.setSizeButton = new Button("Set Size");
@@ -244,5 +250,21 @@ public class MazeView {
         this.state = (this.state == 0) ? 1 : 0;
         this.toggle = true;
         this.paintBoard();
+    }
+
+    /**
+     * Create the view that shows up once the settings button is pressed
+     */
+    private void createSettingView()
+    {
+        SettingsView sv = new SettingsView(this);
+    }
+
+    /**
+     * Create the view that shows up once the tutorial button is pressed
+     */
+    private void createTutorialView()
+    {
+        TutorialView tv = new TutorialView(this);
     }
 }
