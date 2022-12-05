@@ -1,7 +1,7 @@
 package views;
 
 import javafx.scene.text.Font;
-import src.models.MazeModel;
+import models.MazeModel;
 import moves.Moves;
 
 import javafx.animation.Timeline;
