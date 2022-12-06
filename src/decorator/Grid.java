@@ -1,23 +1,40 @@
 package decorator;
 
+import java.awt.*;
+import javafx.scene.paint.Color;
 /**
  * Grid interface
  */
 public interface Grid {
 
     /**
-     * Get the color of the grid
+     * Get the color of the trail following the moving character
      */
-    public String getColor();
+    public Color getTrailColor();
 
     /**
-     * Get the size of the grid
+     * Get the color of the character that is being controlled
      */
-    public float getSize();
+    public Color getCharColor();
 
     /**
-     * Get the shape of the grid
+     * Get the color of the goal square at the end of the game
      */
-    public String getShape();
+    public Color getGoalColor();
+
+    /**
+     * Modify the trail color on the grid
+     */
+    public void modifyTrailColor(Color c);
+
+    /**
+     * Modify the character color on the grid
+     */
+    public void modifyCharColor(Color c);
+
+    /**
+     * Modify the goal square color on the grid
+     */
+    public void modifyGoalColor(Color c);
 
 }
