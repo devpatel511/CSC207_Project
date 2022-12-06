@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 /**
  * A Maze Application, in JavaFX
+ * (Borrowed idea from Tetris Assignment)
  */
 public class MazeApp extends Application {
     MazeModel model;

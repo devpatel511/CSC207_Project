@@ -5,8 +5,10 @@ import decorator.ColorGoal;
 import decorator.ColorTrail;
 import decorator.Grid;
 import javafx.scene.text.Font;
-import models.MazeBoard;
 import models.MazeModel;
+import commands.ResetCommand;
+import commands.ColourCommand;
+import commands.ButtonInvoker;
 
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
@@ -29,13 +31,14 @@ import javafx.stage.Stage;
  * The maze UI class which visualizes the maze. The maze can be reset once a visualization begins
  * and has the ability to toggle between two colours.
  * The receiver of the commands.
+ * (Borrowed ideas from Tetris Assignment)
  */
 public class MazeView {
 
     MazeModel model; //reference to model
     Stage stage;
 
-    Button helpButton, settingButton, startButton, setSizeButton, toggleColour;
+    Button helpButton, settingButton, resetButton, setSizeButton, toggleColour;
     TextField widthField, heightField;
 
     Label movesMade;
@@ -80,10 +83,14 @@ public class MazeView {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-        this.startButton = new Button("Reset");
-        startButton.setId("Start");
-        startButton.setOnAction(e -> {
-            this.reset();
+        ButtonInvoker bt = new ButtonInvoker(); // command-manager
+
+        this.resetButton = new Button("Reset");
+        resetButton.setId("Start");
+        resetButton.setOnAction(e -> {
+            // ResetCommand in action!
+            bt.acceptCommand(new ResetCommand(this));
+            bt.executeCommand();
         });
 
         this.settingButton = new Button("Settings");
@@ -109,7 +116,9 @@ public class MazeView {
 
         this.toggleColour = new Button("☀");
         toggleColour.setOnAction(e -> {
-            colourChange();
+            // ColourCommand in action!
+            bt.acceptCommand(new ColourCommand(this));
+            bt.executeCommand();
         });
 
         Label widthLabel = new Label("width:");
@@ -125,7 +134,7 @@ public class MazeView {
         this.movesMade.setFont(new Font(20));
         this.movesMade.setStyle("-fx-text-fill: #000000");
 
-        HBox controls = new HBox(20, this.toggleColour, this.settingButton, this.startButton, this.helpButton,
+        HBox controls = new HBox(20, this.toggleColour, this.settingButton, this.resetButton, this.helpButton,
                 widthLabel, this.widthField, heightLabel, this.heightField, this.setSizeButton);
         controls.setPadding(new Insets(20, 20, 20, 20));
         controls.setAlignment(Pos.CENTER);
@@ -133,7 +142,7 @@ public class MazeView {
         // the following are on-screen buttons to navigate the maze
         // this feature makes the game more accessible
         HBox onScreen = new HBox();
-        Button up = new Button("Up⬆");
+        Button up = new Button("Up⬆️");
         up.setId("Up⬆");
         up.setOnAction(e ->
         {
@@ -142,7 +151,7 @@ public class MazeView {
             paintBoard();
             borderPane.requestFocus();
         });
-        Button down = new Button("Down⬇");
+        Button down = new Button("Down⬇️");
         down.setOnAction(e ->
         {
             model.moveCharacter(MazeModel.MoveType.DOWN);
@@ -150,7 +159,7 @@ public class MazeView {
             paintBoard();
             borderPane.requestFocus();
         });
-        Button left = new Button("Left⬅");
+        Button left = new Button("Left⬅️");
         left.setOnAction(e ->
         {
             model.moveCharacter(MazeModel.MoveType.LEFT);
@@ -158,7 +167,7 @@ public class MazeView {
             paintBoard();
             borderPane.requestFocus();
         });
-        Button right = new Button("Right➡");
+        Button right = new Button("Right➡️");
         right.setOnAction(e ->
         {
             model.moveCharacter(MazeModel.MoveType.RIGHT);
@@ -213,7 +222,9 @@ public class MazeView {
         return( ((float)(this.height-2)) / this.model.getBoard().getHeight() );
     }
 
-
+    /**
+     * Paint the MazeGrid corresponding to the settings and buttons pressed.
+     */
     public void paintBoard() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         // Draw a rectangle around the whole screen
