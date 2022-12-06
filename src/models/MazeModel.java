@@ -5,14 +5,18 @@ import moves.Moves;
 
 import java.io.Serializable;
 
+/**
+ * class MazeModel to simulate the game.
+ * (Borrowed idea from Tetris Assignment)
+ */
 public class MazeModel implements Serializable {
     public static final int WIDTH = 25; //size of the board in blocks
     public static final int HEIGHT = 25; //height of the board in blocks
 
     protected MazeBoard board;  // Board data structure
 
-    protected int currentX, newX;
-    protected int currentY, newY;
+    protected int currentX;
+    protected int currentY;
 
     public enum MoveType {
         UP,
@@ -34,6 +38,8 @@ public class MazeModel implements Serializable {
      */
     public MazeModel(int width, int height) {
         this.board = new MazeBoard(width, height);
+        this.currentX = 0;
+        this.currentY = 0;
     }
 
     public MazeBoard getBoard()
@@ -41,6 +47,10 @@ public class MazeModel implements Serializable {
         return this.board;
     }
 
+    /**
+     * Move the current position on the board according to player movement.
+     * @param move from the user
+     */
     public void moveCharacter(MoveType move) {
         //MUST COMPLETE TO MOVE CHARACTER ON MAZE
         if (move == MoveType.RIGHT) {

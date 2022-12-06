@@ -1,18 +1,19 @@
 package commands;
+import views.MazeView;
 
 /**
  * Class ColourCommand
  * A Command to be applied to the maze
  */
 public class ColourCommand implements MazeCommand {
-    private final Maze maze; // the receiver of the command
+    private final MazeView maze; // the receiver of the command
 
     /**
      * Constructor
      *
      * @param maze Maze to change colour in
      */
-    public ColourCommand(Maze maze) {
+    public ColourCommand(MazeView maze) {
         this.maze = maze;
     }
 
