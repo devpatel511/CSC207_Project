@@ -1,8 +1,12 @@
 package views;
 
+import decorator.ColorCharacter;
+import decorator.ColorGoal;
+import decorator.ColorTrail;
+import decorator.Grid;
 import javafx.scene.text.Font;
+import models.MazeBoard;
 import models.MazeModel;
-import moves.Moves;
 
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
@@ -250,18 +254,18 @@ public class MazeView {
                     gc.setFill(Color.YELLOW);
                     gc.fillRect(1 + deltaX * i, 1 + deltaY * j, deltaX, deltaY);
                 } else if (board[i][j] == 3) {
-                    gc.setFill(Color.LIGHTGREEN);
+                    gc.setFill(this.model.getBoard().getTrailColor());
                     gc.fillRect(1 + deltaX * i, 1 + deltaY * j, deltaX, deltaY);
                 } else if (board[i][j] == 4) {
-                    gc.setFill(Color.LIGHTGREEN);
+                    gc.setFill(this.model.getBoard().getTrailColor());
                     gc.fillRect(1 + deltaX * i, 1 + deltaY * j, deltaX, deltaY);
-                    gc.setFill(Color.BLUE);
+                    gc.setFill(this.model.getBoard().getCharColor());
                     gc.fillRect((1 + deltaX * i)+(deltaX/4), (1 + deltaY * j)+(deltaY/4),
                             deltaX/2, deltaY/2);
                 }
             }
         }
-        gc.setFill(Color.RED);
+        gc.setFill(this.model.getBoard().getGoalColor());
         gc.fillRect(1 + deltaX*(width-1), 1 + deltaY*(height-1), deltaX, deltaY);
         updateMoves();
     }
@@ -294,6 +298,16 @@ public class MazeView {
      */
     private void updateMoves() {
         movesMade.setText("Moves made: " + moves.Moves.movesMade());
+    }
+
+    public void applySetting(String pathColor, String charColor, String goalColor)
+    {
+        Grid currBoard = this.model.getBoard();
+        currBoard = new ColorTrail(currBoard, pathColor);
+        currBoard = new ColorCharacter(currBoard, charColor);
+        currBoard = new ColorGoal(currBoard, goalColor);
+        this.toggle = true;
+        paintBoard();
     }
 
     /**

@@ -1,17 +1,35 @@
 package models;
 
+import decorator.Grid;
+import javafx.scene.paint.Color;
+
 import java.io.Serializable;
 
-public class MazeBoard implements Serializable {
+public class MazeBoard implements Serializable, Grid {
 
     private int width; //board height and width
     private int height;
+
+    //Color of the trail
+    private Color trailColor;
+
+    //Color of the character
+    private Color charColor;
+
+    //Color of the goal
+    private Color goalColor;
+
 
     protected int[][] mazeGrid; //board grid
 
     public MazeBoard(int width, int height) {
         this.height = height;
         this.width = width;
+
+        //Default board colors
+        this.trailColor = Color.LIGHTGREEN;
+        this.charColor = Color.BLUE;
+        this.goalColor = Color.RED;
 
         this.mazeGrid = new int[width][height];
         for (int i = 0; i < this.width; i++) {
@@ -31,6 +49,36 @@ public class MazeBoard implements Serializable {
 
     public int[][] getMazeGrid() {
         return mazeGrid;
+    }
+
+    @Override
+    public Color getTrailColor() {
+        return this.trailColor;
+    }
+
+    @Override
+    public Color getCharColor() {
+        return this.charColor;
+    }
+
+    @Override
+    public Color getGoalColor() {
+        return this.goalColor;
+    }
+
+    @Override
+    public void modifyTrailColor(Color c) {
+        this.trailColor = c;
+    }
+
+    @Override
+    public void modifyCharColor(Color c) {
+        this.charColor = c;
+    }
+
+    @Override
+    public void modifyGoalColor(Color c) {
+        this.goalColor = c;
     }
 
     public void setPath() {
@@ -69,4 +117,7 @@ public class MazeBoard implements Serializable {
         }
         this.mazeGrid[0][0] = 4;
     }
+
+
+
 }

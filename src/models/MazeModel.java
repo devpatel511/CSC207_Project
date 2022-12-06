@@ -1,5 +1,6 @@
 package models;
 
+import decorator.Grid;
 import moves.Moves;
 
 import java.io.Serializable;

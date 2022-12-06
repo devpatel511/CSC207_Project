@@ -88,7 +88,6 @@ public class SettingsView {
         RadioButton greenCharSelect = new RadioButton("Green");
         greenCharSelect.setAlignment(Pos.CENTER);
         greenCharSelect.setToggleGroup(toggleGroupChar);
-        greenCharSelect.setSelected(true);
         greenCharSelect.setUserData(Color.BLACK);
         greenCharSelect.setFont(new Font(16));
         greenCharSelect.setStyle("-fx-text-fill: #000000");
@@ -102,6 +101,7 @@ public class SettingsView {
 
         RadioButton blueCharSelect = new RadioButton("Blue");
         blueCharSelect.setAlignment(Pos.CENTER);
+        blueCharSelect.setSelected(true);
         blueCharSelect.setToggleGroup(toggleGroupChar);
         blueCharSelect.setUserData(Color.BLACK);
         blueCharSelect.setFont(new Font(16));
@@ -150,6 +150,7 @@ public class SettingsView {
         apply.setId("applyChanges");
 
         HBox buttonPanel = new HBox(10, apply);
+        buttonPanel.setAlignment(Pos.CENTER);
 
         dialogVbox.getChildren().add(pathColorDisplay);
         dialogVbox.getChildren().add(charColorDisplay);
@@ -169,6 +170,8 @@ public class SettingsView {
             String pathColor = path.getText();
             String charColor = character.getText();
             String goalColor = goal.getText();
+
+            this.mazeView.applySetting(pathColor, charColor, goalColor);
         });
     }
 }
