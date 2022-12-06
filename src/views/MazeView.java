@@ -268,6 +268,10 @@ public class MazeView {
         gc.setFill(this.model.getBoard().getGoalColor());
         gc.fillRect(1 + deltaX*(width-1), 1 + deltaY*(height-1), deltaX, deltaY);
         updateMoves();
+        if (board[width - 1][height - 1] == 4) {
+            createEndGameView();
+            borderPane.requestFocus();
+        }
     }
 
 
@@ -333,5 +337,12 @@ public class MazeView {
     private void createTutorialView()
     {
         TutorialView tv = new TutorialView(this);
+    }
+
+    /**
+     * Create the view that shows up once the game is won
+     */
+    private void createEndGameView() {
+        EndGameView ev = new EndGameView(this);
     }
 }
