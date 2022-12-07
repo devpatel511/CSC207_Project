@@ -142,7 +142,7 @@ public class MazeView {
         // the following are on-screen buttons to navigate the maze
         // this feature makes the game more accessible
         HBox onScreen = new HBox();
-        Button up = new Button("Up⬆️");
+        Button up = new Button("Up⬆");
         up.setId("Up⬆");
         up.setOnAction(e ->
         {
@@ -151,7 +151,7 @@ public class MazeView {
             paintBoard();
             borderPane.requestFocus();
         });
-        Button down = new Button("Down⬇️");
+        Button down = new Button("Down⬇");
         down.setOnAction(e ->
         {
             model.moveCharacter(MazeModel.MoveType.DOWN);
@@ -159,7 +159,7 @@ public class MazeView {
             paintBoard();
             borderPane.requestFocus();
         });
-        Button left = new Button("Left⬅️");
+        Button left = new Button("Left⬅");
         left.setOnAction(e ->
         {
             model.moveCharacter(MazeModel.MoveType.LEFT);
@@ -167,7 +167,7 @@ public class MazeView {
             paintBoard();
             borderPane.requestFocus();
         });
-        Button right = new Button("Right➡️");
+        Button right = new Button("Right➡");
         right.setOnAction(e ->
         {
             model.moveCharacter(MazeModel.MoveType.RIGHT);
