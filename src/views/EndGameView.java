@@ -53,5 +53,9 @@ public class EndGameView {
         Scene dialogScene = new Scene(dialogVbox, 400, 100);
         dialog.setScene(dialogScene);
         dialog.show();
+
+        dialog.setOnCloseRequest(event -> {
+            mazeView.reset();
+        });
     }
 }
