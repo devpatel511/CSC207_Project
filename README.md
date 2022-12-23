@@ -5,4 +5,4 @@ A Pathfinding Maze which lets users choose dimensions of desired grid and colour
 ![](/assets/Opening_25x25_Grid.png)
 ![](/assets/Interacting_5x5_Grid.png)
 ![](/assets/Winning_60x60_Grid.png)
-![](/assets/AutoPathFind_35x35_Grid)
+![](/assets/AutoPathFind_35x35_Grid.png)
