@@ -2,6 +2,7 @@ package views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -27,11 +28,20 @@ public class EndGameView {
     public EndGameView(views.MazeView mazeView) {
         this.mazeView = mazeView;
 
-        this.titleLabel = new Label("You WIN!!!");
+        if (!this.mazeView.computer) {
+            this.titleLabel = new Label("You WIN!!!");
+        } else {
+            this.titleLabel = new Label("Computer WINS!!!");
+        }
         this.titleLabel.setFont(new Font("Verdana", 20));
         this.titleLabel.setStyle("-fx-text-fill: #000000");
 
-        Text t1 = new Text("It took " + mazeView.movesMade.getText().substring(12) + " moves!");
+        Text t1;
+        if (!this.mazeView.computer) {
+            t1 = new Text("It took " + mazeView.movesMade.getText().substring(12) + " moves!");
+        } else {
+            t1 = new Text("The computer was able to solve this maze in " + mazeView.movesMade.getText().substring(12) + " moves!");
+        }
 
         this.text = new TextFlow();
         this.text.getChildren().add(t1);

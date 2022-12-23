@@ -10,6 +10,8 @@ import commands.ResetCommand;
 import commands.ColourCommand;
 import commands.ButtonInvoker;
 
+import moves.Moves;
+
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -26,6 +28,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * The maze UI class which visualizes the maze. The maze can be reset once a visualization begins
@@ -45,6 +49,8 @@ public class MazeView {
 
     BorderPane borderPane;
     Timeline timeline;
+
+    boolean computer = false;
 
     Canvas canvas;
     GraphicsContext gc;
@@ -175,7 +181,14 @@ public class MazeView {
             paintBoard();
             borderPane.requestFocus();
         });
-        onScreen.getChildren().addAll(movesMade, up, down, left, right);
+        Button autoFill = new Button("Give Up");
+        autoFill.setOnAction(e ->
+        {
+            computer = true;
+            auto();
+            borderPane.requestFocus();
+        });
+        onScreen.getChildren().addAll(movesMade, up, down, left, right, autoFill);
         onScreen.setAlignment(Pos.CENTER);
         onScreen.setSpacing(10);
 
@@ -220,6 +233,28 @@ public class MazeView {
     }
     private final float dY() {
         return( ((float)(this.height-2)) / this.model.getBoard().getHeight() );
+    }
+
+    public void auto() {
+        moves.Moves x;
+        x = moves.Moves.getInstance();
+        x.reset();
+        int[][] board = this.model.getBoard().getRightPath();
+        int width = this.model.getBoard().getWidth();
+        int height = this.model.getBoard().getHeight();
+        double deltaX = this.width / width;
+        double deltaY = this.height / height;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                if (board[i][j] == 1) {
+                    gc.setFill(Color.FIREBRICK);
+                    gc.fillRect(1 + deltaX * i, 1 + deltaY * j, deltaX, deltaY);
+                    x = moves.Moves.getInstance();
+                }
+            }
+        }
+        movesMade.setText("Moves made: " + (moves.Moves.movesMade() - 1));
+        createEndGameView();
     }
 
     /**
@@ -305,6 +340,7 @@ public class MazeView {
         moves.Moves x;
         x = moves.Moves.getInstance();
         x.reset();
+        computer = false;
         this.paintBoard();
     }
 
