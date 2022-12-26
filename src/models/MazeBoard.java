@@ -22,6 +22,8 @@ public class MazeBoard implements Serializable, Grid {
 
     protected int[][] mazeGrid; //board grid
 
+    protected int[][] rightPath; //board grid
+
     public MazeBoard(int width, int height) {
         this.height = height;
         this.width = width;
@@ -32,9 +34,11 @@ public class MazeBoard implements Serializable, Grid {
         this.goalColor = Color.RED;
 
         this.mazeGrid = new int[width][height];
+        this.rightPath = new int[width][height];
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
                 mazeGrid[i][j] = 0;
+                rightPath[i][j] = 0;
             }
         }
     }
@@ -49,6 +53,10 @@ public class MazeBoard implements Serializable, Grid {
 
     public int[][] getMazeGrid() {
         return mazeGrid;
+    }
+
+    public int[][] getRightPath() {
+        return rightPath;
     }
 
     @Override
@@ -86,6 +94,7 @@ public class MazeBoard implements Serializable, Grid {
         int j = 0;
         while (i < this.width && j < this.height) {
             this.mazeGrid[i][j] = 1;
+            this.rightPath[i][j] = 1;
             if (Math.round(Math.random()) == 0) {
                 i += 1;
             } else {
@@ -95,11 +104,13 @@ public class MazeBoard implements Serializable, Grid {
         if (i >= this.width) {
             while (j < this.height) {
                 this.mazeGrid[this.width - 1][j] = 1;
+                this.rightPath[this.width - 1][j] = 1;
                 j++;
             }
         } else {
             while (i < this.width) {
                 this.mazeGrid[i][this.height - 1] = 1;
+                this.rightPath[i][this.height - 1] = 1;
                 i++;
             }
         }
